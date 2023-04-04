@@ -1,0 +1,7 @@
+{% include 'navbar.html' %}
+  <body class="min-vh-100 d-flex flex-column" cz-shortcut-listen="true">
+    <main class="flex-grow-1">
+    {% block page_content %}{% endblock %}
+    </main>
+  {% include 'footer.html' %}
+</body>
