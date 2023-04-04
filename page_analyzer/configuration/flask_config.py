@@ -3,9 +3,11 @@ from dotenv import load_dotenv
 
 
 class Configuration:
-    DEBUG = False
+    DEBUG = True
+    TESTING = True
     SECRET_KEY = os.urandom(32)
     SESSION_TYPE = 'filesystem'
+    SESSION_COOKIE_NAME = "cookie"
 
 
 class Psqlconfig:
