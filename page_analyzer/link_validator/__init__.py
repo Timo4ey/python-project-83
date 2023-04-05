@@ -1,3 +1,3 @@
-from .link_validator import validate_link
+from .link_validator import Validator
 
-__all__ = ['validate_link']
+__all__ = ['Validator']
