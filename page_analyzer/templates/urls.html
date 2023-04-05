@@ -1,2 +1,35 @@
-{% include 'navbar.html' %}
-{% include 'footer.html' %}
+{% extends 'body.html' %}
+    {% block page_content %}
+    <div class="container-lg mt-3">
+        <h1>Сайты</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-nowrap" data-test="urls">
+                <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Последняя проверка</th>
+                    <th>Код ответа</th>
+                  </tr>
+                   {% if data %}
+                    {% for url in data %}
+                    <tr>
+                      <td>{{ url.id }}</td>
+                      <td>
+                        <a href="/urls/{{ url.id }}">
+                          {{ url.name }}
+                        </a>
+                      </td>
+
+                      <td></td>
+                      <td></td>
+                    {% endfor %}
+
+                    {% endif %}
+                         </tr>
+
+                </tbody>
+          </table>
+        </div>
+        </div>
+    {% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'body.html'%}
+ {% block page_content %}
+    <div class="container-lg mt-3">
+      <h1>Страница не найдена</h1>
+
+
+  <p>Здесь нет того, что вы ищете.</p>
+  <p><a href="{{ url_for('main.main_page') }}">Вернуться на главную</a></p>
+
+    </div>
+ {% endblock %}
