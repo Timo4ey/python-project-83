@@ -24,7 +24,7 @@ jobs:
         run: |
           make lint
       - name: Print access
-        run: echo "access!!! ${{env.DATABASE_URL}}"
+        run: echo "access!!! $DATABASE_URL"
       - name: Run Tests
         run: |
           make check
