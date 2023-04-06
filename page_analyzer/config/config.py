@@ -20,7 +20,7 @@ class Config:
     SESSION_COOKIE_NAME = 'session'
     TEMPLATES_FOLDER = 'templates'
     STATIC_FOLDER = 'static'
-    SQLALCHEMY_DATABASE_URI = url.url
+    SQLALCHEMY_DATABASE_URI = url.DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
