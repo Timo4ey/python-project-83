@@ -1,15 +1,12 @@
 import pytest
 from page_analyzer import app as create_app
-from page_analyzer.models import db
-
-
 
 
 
 @pytest.fixture()
 def application():
     app = create_app
-    db.init_app(app)
+    app.config.setdefault("SQLALCHEMY_BINDS", None)
     yield app
 
 

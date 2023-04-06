@@ -8,3 +8,5 @@ name_of_backup_file
 migrations/
 
 .swp
+
+page_analyzer/db/
