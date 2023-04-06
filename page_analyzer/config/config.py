@@ -19,8 +19,8 @@ class Config:
     SESSION_COOKIE_NAME = 'session'
     TEMPLATES_FOLDER = 'templates'
     STATIC_FOLDER = 'static'
-    SQLALCHEMY_DATABASE_URI = PsqlConfig().DATABASE_URL
-    SQLALCHEMY_BINDS = {'database': PsqlConfig().DATABASE_URL}
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_BINDS = {'database': os.getenv('DATABASE_URL')}
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
