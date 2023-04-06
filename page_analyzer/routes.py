@@ -1,7 +1,7 @@
 from flask import (render_template, request,
                    Blueprint, flash,
                    get_flashed_messages,
-                   redirect,
+                   redirect, abort,
                    url_for)
 from .link_validator import Validator
 from .models import db, Urls
@@ -27,7 +27,7 @@ def url_page(id):
     message = get_flashed_messages(with_categories=True)
     if list(data):
         return render_template('url.html', data=data, messages=message)
-    return url_for('page_not_found')
+    abort(404, description="Resource not found")
 
 
 @main.route('/urls', methods=["POST"])
