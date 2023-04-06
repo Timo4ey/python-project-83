@@ -20,6 +20,6 @@ def create_app():
 
 app = create_app()
 
-if __name__ == "__main__":
-    app.config.from_object(DevConfig)
-    app.run()
+# if __name__ == "__main__":
+#     app.config.from_object(DevConfig)
+#     app.run()
