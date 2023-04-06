@@ -19,8 +19,8 @@ class Config:
     SESSION_COOKIE_NAME = 'session'
     TEMPLATES_FOLDER = 'templates'
     STATIC_FOLDER = 'static'
-    SQLALCHEMY_DATABASE_URI = PsqlConfig().DATABASE_URL
-    SQLALCHEMY_BINDS = {'database': PsqlConfig().DATABASE_URL}
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:tPrEnatv6eVVrTuGDBQJ@containers-us-west-74.railway.app:5452/railway"
+    SQLALCHEMY_BINDS = {'database': "postgresql://postgres:tPrEnatv6eVVrTuGDBQJ@containers-us-west-74.railway.app:5452/railway"}
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
