@@ -20,7 +20,7 @@ class Config:
     TEMPLATES_FOLDER = 'templates'
     STATIC_FOLDER = 'static'
     SQLALCHEMY_DATABASE_URI = PsqlConfig().DATABASE_URL
-    SQLALCHEMY_BINDS = {"users": PsqlConfig.DATABASE_URL}
+    SQLALCHEMY_BINDS = PsqlConfig().DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
