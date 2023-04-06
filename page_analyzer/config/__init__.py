@@ -1,4 +1,4 @@
-from .flask_config import Configuration as Config, Psqlconfig
+from .config import Config, ProdConfig, DevConfig, PsqlConfig
 
 
-__all__ = ['Config', "Psqlconfig"]
+__all__ = ['Config', "ProdConfig", "DevConfig", "PsqlConfig"]

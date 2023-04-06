@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 
-class Psqlconfig:
+class PsqlConfig:
     load_dotenv()
     url = os.getenv('DATABASE_URL')
     db_host = os.getenv('DB_HOST')
@@ -12,12 +12,25 @@ class Psqlconfig:
     DATABASE_URL = os.getenv('DATABASE_URL')
 
 
-class Configuration:
-    url = Psqlconfig()
-    DEBUG = False
-    TESTING = False
+class Config:
+    url = PsqlConfig()
+    SESSION_COOKIE_SECURE = True
     SECRET_KEY = os.urandom(32)
     SESSION_TYPE = 'filesystem'
-    SESSION_COOKIE_NAME = "cookie"
+    SESSION_COOKIE_NAME = 'session'
+    TEMPLATES_FOLDER = 'templates'
+    STATIC_FOLDER = 'static'
     SQLALCHEMY_DATABASE_URI = url.url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+class ProdConfig(Config):
+    FLASK_ENV = 'production'
+    DEBUG = False
+    TESTING = False
+
+
+class DevConfig(Config):
+    FLASK_ENV = 'development'
+    DEBUG = True
+    TESTING = True
