@@ -3,6 +3,9 @@ on:
   - push
   - pull_request
 
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,14 +23,9 @@ jobs:
         run: |
           pip install poetry
           make install
-      - name: Set war
-        run: |
-          export DATABASE_URL=${{ secrets.DATABASE_URL }}
       - name: Run linter
         run: |
           make lint
-      - name: Print access
-        run: echo "access!!! ${{ github.DATABASE_URL }}"
       - name: Run Tests
         run: |
           make check
