@@ -12,10 +12,6 @@ class PsqlConfig:
     DATABASE_URL = os.getenv('DATABASE_URL')
 
 
-link = 'postgresql://postgres:tPrEnatv6eVVrTuGDBQJ@containers-us-west-74.\
-railway.app:5452/railway'
-
-
 class Config:
     SESSION_COOKIE_SECURE = True
     SECRET_KEY = os.urandom(32)
@@ -23,8 +19,8 @@ class Config:
     SESSION_COOKIE_NAME = 'session'
     TEMPLATES_FOLDER = 'templates'
     STATIC_FOLDER = 'static'
-    SQLALCHEMY_DATABASE_URI = link
-    SQLALCHEMY_BINDS = {'database': link}
+    SQLALCHEMY_DATABASE_URI = PsqlConfig().DATABASE_URL
+    SQLALCHEMY_BINDS = {'database': PsqlConfig().DATABASE_URL}
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

@@ -20,6 +20,9 @@ jobs:
         run: |
           pip install poetry
           make install
+      - name: Set war
+        run: |
+          export DATABASE_URL=${{ secrets.DATABASE_URL }}
       - name: Run linter
         run: |
           make lint
