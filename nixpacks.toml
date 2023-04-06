@@ -17,7 +17,8 @@ paths = ['/opt/venv/bin']
 nixPkgs = [
     'python310',
     'gcc',
-    'poetry'
+    'poetry',
+    'postgresql'
 ]
 nixLibs = [
     'zlib',
