@@ -34,12 +34,11 @@ def url_page(id):
 def get_url():
     url = request.form['url']
     validator = Validator(url)
-    validation = validator.validate_link()
     if not url:
         flash("URL обязателен", "failed")
-    if not validation:
+    if not validator.is_valid:
         flash("Некорректный URL", "failed")
-    if not url or not validation:
+    if not url or not validator.is_valid:
         return redirect(url_for('main.main_page'))
 
     data = Urls.query.all()
@@ -49,7 +48,7 @@ def get_url():
         flash("Страница уже существует", "info")
         return redirect(url_for('main.url_page', id=val[0].id))
 
-    db.session.add(Urls(name=validation))
+    db.session.add(Urls(name=validator.get_link))
 
     db.session.commit()
     id = 1 if not data else data[-1].id + 1
