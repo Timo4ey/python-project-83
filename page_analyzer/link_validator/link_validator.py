@@ -14,7 +14,10 @@ class Validator:
         return validators.url(url)
 
     def cut_link(self, url):
-        self._link = urlparse(url)._replace(path="").geturl()
+        self._link = urlparse(url)._replace(path="",
+                                            params="",
+                                            query="",
+                                            fragment="").geturl()
 
     @property
     def get_link(self):
@@ -34,7 +37,9 @@ if __name__ == '__main__':
     links_ = [{'name': 'https://ru.hexlet.io'},
               {'name': 'https://www.youtube.com'},
               {'name': 'https://ru.wikipedia.org'}]
-
+    t = "https://ru.hexlet.io/projects/83/members/30036?step=3"
+    v = Validator(t)
+    print(v.get_link)
     # link = 'https://test.com'
     # v = Validator(link)
     # if v.valid:
