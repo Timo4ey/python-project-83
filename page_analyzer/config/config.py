@@ -13,14 +13,13 @@ class PsqlConfig:
 
 
 class Config:
-    url = PsqlConfig()
     SESSION_COOKIE_SECURE = True
     SECRET_KEY = os.urandom(32)
     SESSION_TYPE = 'filesystem'
     SESSION_COOKIE_NAME = 'session'
     TEMPLATES_FOLDER = 'templates'
     STATIC_FOLDER = 'static'
-    SQLALCHEMY_DATABASE_URI = url.DATABASE_URL
+    SQLALCHEMY_DATABASE_URI = PsqlConfig().DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
