@@ -16,6 +16,7 @@ def create_app():
     created_app.register_blueprint(main)
     Session(created_app)
     Bootstrap4(created_app)
+    print("binds:", created_app.config.get('SQLALCHEMY_BINDS'))
     return created_app
 
 
