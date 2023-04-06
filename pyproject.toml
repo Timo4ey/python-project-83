@@ -21,6 +21,7 @@ flask-wtf = "^1.1.1"
 psycopg2-binary = "^2.9.6"
 flask-sqlalchemy = "^3.0.3"
 validators = "^0.20.0"
+pytest-postgresql = "^4.1.1"
 
 
 [build-system]

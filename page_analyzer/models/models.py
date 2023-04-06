@@ -1,9 +1,8 @@
-from page_analyzer.configuration import Psqlconfig
+from page_analyzer.config import PsqlConfig
 from .extensions import db
 from datetime import datetime
 
-access = Psqlconfig()
-url_base = access.DATABASE_URL
+url_base = PsqlConfig().DATABASE_URL
 
 
 class Urls(db.Model):
