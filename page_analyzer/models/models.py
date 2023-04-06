@@ -3,7 +3,7 @@ from .extensions import db
 from datetime import datetime
 
 access = Psqlconfig()
-url_base = access.url
+url_base = access.DATABASE_URL
 
 
 class Urls(db.Model):

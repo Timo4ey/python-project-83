@@ -4,7 +4,6 @@ from flask_bootstrap import Bootstrap4
 from .configuration import Config
 from .routes import main
 from .models import db
-from flask_migrate import Migrate
 from .routes import page_not_found
 
 
@@ -15,7 +14,6 @@ def create_app():
     Session(created_app)
     Bootstrap4(created_app)
     db.init_app(created_app)
-    Migrate(created_app, db)
     created_app.register_blueprint(main)
     return created_app
 

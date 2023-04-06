@@ -27,7 +27,7 @@ def url_page(id):
     message = get_flashed_messages(with_categories=True)
     if list(data):
         return render_template('url.html', data=data, messages=message)
-    # return redirect(url_for('main.page_not_found'))
+    return url_for('page_not_found')
 
 
 @main.route('/urls', methods=["POST"])

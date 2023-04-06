@@ -9,6 +9,7 @@ class Psqlconfig:
     db_user = os.getenv('DB_USER')
     db_password = os.getenv('DB_PASSWORD')
     db_name = os.getenv('DB_NAME')
+    DATABASE_URL = os.getenv('DATABASE_URL')
 
 
 class Configuration:
