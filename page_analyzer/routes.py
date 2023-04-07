@@ -4,7 +4,9 @@ from flask import (render_template, request,
                    redirect, abort,
                    url_for)
 from .link_validator import Validator
-from .models import db, Urls
+from .models import db, Urls, UrlChecks
+from .url_handler import GetRequest
+from .url_handler import arrange_data
 
 main = Blueprint("main", __name__)
 
@@ -17,16 +19,26 @@ def main_page():
 
 @main.route('/urls', methods=["GET"])
 def urls():
-    data = Urls.query.all()
-    return render_template('urls.html', data=data[::-1])
+    url_check = UrlChecks.query.all()
+    join_data = db.session.query(
+        Urls.id, Urls.name, UrlChecks.status_code, UrlChecks.created_at
+    ).join(UrlChecks,
+           UrlChecks.url_id == Urls.id,
+           isouter=True
+           ).all()
+
+    data = arrange_data(join_data)
+    return render_template('urls.html', data=data, url_checks=url_check)
 
 
 @main.route('/urls/<id>')
 def url_page(id):
     data = Urls.query.filter_by(id=id)
+    checked = UrlChecks.query.filter_by(url_id=id)
     message = get_flashed_messages(with_categories=True)
     if list(data):
-        return render_template('url.html', data=data, messages=message)
+        return render_template('url.html', data=data,
+                               messages=message, checked=checked)
     abort(404, description="Resource not found")
 
 
@@ -64,3 +76,16 @@ def page_not_found(e):
 @main.errorhandler(500)
 def internal_server_error(e):
     return render_template("unknown_page.html"), 500
+
+
+@main.post("/urls/<id>/checks")
+def checker_page(id):
+    link = Urls.query.filter_by(id=id)[0].name
+    code = GetRequest(link).status_code()
+    if 200 <= code < 300:
+        db.session.add(UrlChecks(url_id=id, status_code=code))
+        db.session.commit()
+        flash('Страница успешно проверена', 'success')
+    else:
+        flash('Произошла ошибка при проверке', "danger")
+    return redirect(url_for("main.url_page", id=id))

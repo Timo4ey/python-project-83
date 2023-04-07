@@ -23,20 +23,21 @@
                 <tr>
                   <td>Дата создания</td>
                   <td>{{ item.created_at.date() }}</td>
-                  {% endfor %}
+
                 </tr>
               </tbody>
             </table>
           </div>
 
             <h2 class="mt-5 mb-3">Проверки</h2>
-            <form method="post" action="/urls/1/checks">
+            <form method="post" action="/urls/{{ item.id }}/checks">
                 <input type="submit" class="btn btn-primary" value="Запустить проверку">
             </form>
-
+            {% endfor %}
               <div>
-                <table class="table table-bordered table-hover mt-2" data-test="checks">
+                <table class="table table-bordered table-hover mt-2"  data-test="checks">
                   <tbody>
+
                 <tr>
                     <th>ID</th>
                     <th>Код ответа</th>
@@ -45,7 +46,33 @@
                     <th>description</th>
                     <th>Дата создания</th>
                 </tr>
+                 {% if checked %}
+                    {% for url in  checked %}
+                <tr>
+                    <td>{{ url.id }}</td>
+                    <td>{{ url.status_code }}</td>
+                    {% if url.h1 %}
+                        <td>{{ url.h1 }}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
 
+                    {% if url.title %}
+                        <td>{{ url.title }}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+
+                    {% if url.description %}
+                        <td>{{ url.description }}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+
+                    <td>{{ url.created_at.date() }}</td>
+                    {% endfor %}
+                </tr>
+                  {% endif %}
                   </tbody>
                 </table>
               </div>

@@ -11,18 +11,27 @@
                     <th>Последняя проверка</th>
                     <th>Код ответа</th>
                   </tr>
+<!--                  if1 start-->
                    {% if data %}
-                    {% for url in data %}
-                    <tr>
-                      <td>{{ url.id }}</td>
-                      <td>
-                        <a href="/urls/{{ url.id }}">
-                          {{ url.name }}
-                        </a>
-                      </td>
+                        {% for k,v in data.items() %}
+                            <tr>
+                              <td>{{ k }}</td>
+                              <td>
+                                <a href="/urls/{{ k }}">
+                                  {{ v.name }}
+                                </a>
+                              </td>
+                                {% if v.created_at %}
+                                     <td>{{ v.created_at.date() }}</td>
+                                {% else %}
+                                     <td></td>
+                                {% endif %}
 
-                      <td></td>
-                      <td></td>
+                                  {% if v.status_code %}
+                                     <td>{{ v.status_code }}</td>
+                                {% else %}
+                                     <td></td>
+                                {% endif %}
                     {% endfor %}
 
                     {% endif %}
