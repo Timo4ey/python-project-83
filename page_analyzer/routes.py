@@ -5,7 +5,7 @@ from flask import (render_template, request,
                    url_for)
 from .link_validator import Validator
 from .models import db, Urls, UrlChecks
-from .url_handler import GetRequest
+from .url_handler import DataBuilder
 from .url_handler import arrange_data
 
 main = Blueprint("main", __name__)
@@ -81,9 +81,13 @@ def internal_server_error(e):
 @main.post("/urls/<id>/checks")
 def checker_page(id):
     link = Urls.query.filter_by(id=id)[0].name
-    code = GetRequest(link).status_code()
-    if 200 <= code < 300:
-        db.session.add(UrlChecks(url_id=id, status_code=code))
+    response = DataBuilder(link)
+    if 200 <= response.status_code() < 300:
+        db.session.add(UrlChecks(
+            url_id=id, status_code=response.status_code(),
+            h1=response.get_head_one(), title=response.get_title(),
+            description=response.get_description()
+        ))
         db.session.commit()
         flash('Страница успешно проверена', 'success')
     else:
