@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "hexlet-code"
-version = "1.1.0"
+version = "2.1.0"
 description = ""
 authors = ["Timofey"]
 readme = "README.md"
 packages = [{include = "page_analyzer"}]
 
 [tool.poetry.dependencies]
-python = ">=3.10"
+python = ">=3.10,<4"
 flask = "^2.2.3"
 gunicorn = "^20.1.0"
 flake8 = "^6.0.0"
@@ -22,6 +22,7 @@ psycopg2-binary = "^2.9.6"
 flask-sqlalchemy = "^3.0.3"
 validators = "^0.20.0"
 pytest-postgresql = "^4.1.1"
+requests = "^2.28.2"
 
 
 [build-system]
