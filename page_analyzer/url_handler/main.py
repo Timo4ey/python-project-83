@@ -1,4 +1,5 @@
 import requests
+from requests import ConnectTimeout
 from bs4 import BeautifulSoup
 from dataclasses import dataclass
 from datetime import datetime
@@ -6,7 +7,15 @@ from datetime import datetime
 
 class GetRequest:
     def __init__(self, link, *args, **kwargs):
-        self.data = self.get_data(link)
+        self.req = self.get_data(link)
+        self.data = ''
+        if self.req != 404:
+            self.data = self.get_data(link)
+        self.s_code = 0
+        if self.req == 402:
+            self.s_code = 402
+        else:
+            self.s_code = self.req.status_code
 
     @dataclass()
     class DataMix:
@@ -19,21 +28,31 @@ class GetRequest:
 
     @staticmethod
     def get_data(link):
-        with requests.get(link) as data:
-            return data
+        try:
+            with requests.get(link, timeout=10) as data:
+                return data
+        except ConnectTimeout as _ex:
+            print(_ex)
+        return 402
 
     def status_code(self):
-        return self.data.status_code
+        if self.data != 402:
+            return self.data.status_code
+        return 402
 
     def get_url_text(self):
-        return self.data.text
+        if self.data != 402:
+            return self.data.text
 
 
 class DataBuilder(GetRequest):
     def __init__(self, link, id, *args, **kwargs):
         super().__init__(link, *args, **kwargs)
         self.id = id
-        self.bs = BeautifulSoup(self.get_url_text(), 'html.parser')
+        self.bs = ''
+        self.req = self.get_url_text()
+        if self.req is not None:
+            self.bs = BeautifulSoup(self.req, 'html.parser')
         self.title = None
         self.h1 = None
         self.description = None
@@ -68,11 +87,14 @@ class DataBuilder(GetRequest):
                             self.get_description())
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # https://www.crummy.com/
     # https://ru.hexlet.io/
     # https://scrapeops.io/
-    # g = DataBuilder("https://ru.hexlet.io/")
+    # http://test.com
+    g = DataBuilder("https://scrapeops.io", 1)
+    print(g.req)
+
     # s = g.get_all_data()
     # i = ','.join([x for x in s.__dataclass_fields__])
     # print(i)

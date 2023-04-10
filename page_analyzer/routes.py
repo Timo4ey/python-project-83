@@ -41,7 +41,6 @@ def get_url():
         flash("Некорректный URL", "failed")
     if not url or not validator.is_valid:
         return render_template('index.html'), 422
-        # return redirect(url_for('main.main_page'))
     data = Urls()
     db_data = data.get_all_data()
     val = validator.validate_unique_link(db_data)
@@ -59,7 +58,7 @@ def get_url():
 def checker_page(id):
     link = Urls().get_certain_id(id=id).name
     response = DataBuilder(link, id)
-    if 200 <= response.status_code() < 300:
+    if 200 <= response.s_code < 300:
         urls_check = UrlChecks()
         urls_check.create_check(response.get_all_data())
         flash('Страница успешно проверена', 'success')
@@ -76,8 +75,3 @@ def page_not_found(e):
 @main.errorhandler(500)
 def internal_server_error(e):
     return render_template("unknown_page.html"), 500
-
-
-# @main.errorhandler(422)
-# def unprocessable_content(e):
-#     return redirect(url_for('main.main_page'))
