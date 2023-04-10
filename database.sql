@@ -342,26 +342,6 @@ COPY _timescaledb_config.bgw_job (id, application_name, schedule_interval, max_r
 -- Data for Name: url_checks; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.url_checks (id, url_id, status_code, h1, title, description, created_at) FROM stdin;
-1	1	200	Онлайн-школа программирования, за выпускниками которой охотятся компании\n	Хекслет — больше чем школа программирования. Онлайн курсы, сообщество программистов	Живое онлайн сообщество программистов и разработчиков на JS, Python, Java, PHP, Ruby. Авторские программы обучения с практикой и готовыми проектами в резюме. Помощь в трудоустройстве после успешного окончания обучения	2023-04-10 12:39:04.535051
-2	2	200	\n      \n        Скачай курс в приложении\n      \n    	\n	Promoting efficient learning by developing innovative educational technologies. Create an interactive lesson and employ automated grading software.	2023-04-10 12:39:04.535051
-3	3	200	SQLAlchemy 2.0 Documentation	\n        \n        \n    \n    SQLAlchemy Documentation\n —\n    SQLAlchemy 2.0 Documentation\n\n        \n    	None	2023-04-10 12:39:04.535051
-4	3	200	SQLAlchemy 2.0 Documentation	\n        \n        \n    \n    SQLAlchemy Documentation\n —\n    SQLAlchemy 2.0 Documentation\n\n        \n    	None	2023-04-10 12:44:09.363142
-5	3	200	SQLAlchemy 2.0 Documentation	\n        \n        \n    \n    SQLAlchemy Documentation\n —\n    SQLAlchemy 2.0 Documentation\n\n        \n    	None	2023-04-10 12:52:04.573461
-6	1	200	Онлайн-школа программирования, за выпускниками которой охотятся компании\n	Хекслет — больше чем школа программирования. Онлайн курсы, сообщество программистов	Живое онлайн сообщество программистов и разработчиков на JS, Python, Java, PHP, Ruby. Авторские программы обучения с практикой и готовыми проектами в резюме. Помощь в трудоустройстве после успешного окончания обучения	2023-04-10 12:52:04.824145
-7	3	200	SQLAlchemy 2.0 Documentation	\n        \n        \n    \n    SQLAlchemy Documentation\n —\n    SQLAlchemy 2.0 Documentation\n\n        \n    	None	2023-04-10 10:03:35.097156
-
-
---
--- TOC entry 3466 (class 0 OID 17481)
--- Dependencies: 249
--- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.urls (id, name, created_at) FROM stdin;
-1	https://ru.hexlet.io	2023-04-10 12:39:15.031636
-2	https://stepik.org	2023-04-10 12:39:37.138841
-3	https://docs.sqlalchemy.org	2023-04-10 12:40:11.089756
 
 
 
