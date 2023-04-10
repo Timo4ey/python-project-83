@@ -1,7 +1,7 @@
 import psycopg2
 from datetime import datetime
-from page_analyzer.config import PsqlConfig
 from dataclasses import dataclass, fields
+# from page_analyzer.config import PsqlConfig
 
 
 class BaseUrls:
@@ -11,7 +11,9 @@ class BaseUrls:
     @staticmethod
     def db_connector(string: str):
         result = None
-        conn = psycopg2.connect(f"{PsqlConfig.DATABASE_URL}")
+        sec = "bz5Lt06h8B1FP2DXeLVu@containers-us-west-177"
+        third = ".railway.app:5656/railway"
+        conn = psycopg2.connect(f"postgresql://postgres:{sec}{third}")
         conn.autocommit = True
 
         try:
