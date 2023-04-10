@@ -214,6 +214,7 @@ ALTER TABLE _timescaledb_catalog.metadata DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.metadata (key, value, include_in_telemetry) FROM stdin;
 exported_uuid	297f21a7-717e-4124-9823-df641de0b81f	t
+\.
 
 
 ALTER TABLE _timescaledb_catalog.metadata ENABLE TRIGGER ALL;
@@ -225,6 +226,7 @@ ALTER TABLE _timescaledb_catalog.metadata ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.remote_txn DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.remote_txn (data_node_name, remote_transaction_id) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.remote_txn ENABLE TRIGGER ALL;
@@ -236,6 +238,7 @@ ALTER TABLE _timescaledb_catalog.remote_txn ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.tablespace DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.tablespace (id, hypertable_id, tablespace_name) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.tablespace ENABLE TRIGGER ALL;
@@ -247,6 +250,7 @@ ALTER TABLE _timescaledb_catalog.tablespace ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_config.bgw_job DISABLE TRIGGER ALL;
 
 COPY _timescaledb_config.bgw_job (id, application_name, schedule_interval, max_runtime, max_retries, retry_period, proc_schema, proc_name, owner, scheduled, hypertable_id, config) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_config.bgw_job ENABLE TRIGGER ALL;
@@ -261,7 +265,7 @@ COPY public.urls (id, name, created_at) FROM stdin;
 1	https://ru.hexlet.io	2023-04-10 12:39:15.031636
 2	https://stepik.org	2023-04-10 12:39:37.138841
 3	https://docs.sqlalchemy.org	2023-04-10 12:40:11.089756
-
+\.
 
 
 ALTER TABLE public.urls ENABLE TRIGGER ALL;
@@ -280,7 +284,7 @@ COPY public.url_checks (id, url_id, status_code, h1, title, description, created
 5	3	200	SQLAlchemy 2.0 Documentation	\n        \n        \n    \n    SQLAlchemy Documentation\n —\n    SQLAlchemy 2.0 Documentation\n\n        \n    	None	2023-04-10 12:52:04.573461
 6	1	200	Онлайн-школа программирования, за выпускниками которой охотятся компании\n	Хекслет — больше чем школа программирования. Онлайн курсы, сообщество программистов	Живое онлайн сообщество программистов и разработчиков на JS, Python, Java, PHP, Ruby. Авторские программы обучения с практикой и готовыми проектами в резюме. Помощь в трудоустройстве после успешного окончания обучения	2023-04-10 12:52:04.824145
 7	3	200	SQLAlchemy 2.0 Documentation	\n        \n        \n    \n    SQLAlchemy Documentation\n —\n    SQLAlchemy 2.0 Documentation\n\n        \n    	None	2023-04-10 10:03:35.097156
-
+\.
 
 
 ALTER TABLE public.url_checks ENABLE TRIGGER ALL;
@@ -344,3 +348,4 @@ SELECT pg_catalog.setval('public.urls_id_seq', 3, true);
 --
 -- PostgreSQL database dump complete
 --
+
