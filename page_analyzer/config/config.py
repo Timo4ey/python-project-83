@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 
 
 class PsqlConfig:
+    os.path.dirname(__file__)
+    with open(os.path.dirname(__file__)+'/key', 'r') as f:
+        DATABASE_KEY = f.read()
     load_dotenv()
     url = os.getenv('DATABASE_URL')
     db_host = os.getenv('DB_HOST')
