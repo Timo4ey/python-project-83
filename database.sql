@@ -25,6 +25,7 @@ SET SESSION AUTHORIZATION DEFAULT;
 ALTER TABLE _timescaledb_cache.cache_inval_bgw_job DISABLE TRIGGER ALL;
 
 COPY _timescaledb_cache.cache_inval_bgw_job  FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_cache.cache_inval_bgw_job ENABLE TRIGGER ALL;
@@ -36,6 +37,7 @@ ALTER TABLE _timescaledb_cache.cache_inval_bgw_job ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_cache.cache_inval_extension DISABLE TRIGGER ALL;
 
 COPY _timescaledb_cache.cache_inval_extension  FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_cache.cache_inval_extension ENABLE TRIGGER ALL;
@@ -47,6 +49,7 @@ ALTER TABLE _timescaledb_cache.cache_inval_extension ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_cache.cache_inval_hypertable DISABLE TRIGGER ALL;
 
 COPY _timescaledb_cache.cache_inval_hypertable  FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_cache.cache_inval_hypertable ENABLE TRIGGER ALL;
@@ -58,6 +61,7 @@ ALTER TABLE _timescaledb_cache.cache_inval_hypertable ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.hypertable DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.hypertable (id, schema_name, table_name, associated_schema_name, associated_table_prefix, num_dimensions, chunk_sizing_func_schema, chunk_sizing_func_name, chunk_target_size, compression_state, compressed_hypertable_id, replication_factor) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.hypertable ENABLE TRIGGER ALL;
@@ -69,6 +73,7 @@ ALTER TABLE _timescaledb_catalog.hypertable ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.chunk DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.chunk (id, hypertable_id, schema_name, table_name, compressed_chunk_id, dropped) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.chunk ENABLE TRIGGER ALL;
@@ -80,6 +85,7 @@ ALTER TABLE _timescaledb_catalog.chunk ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.dimension DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.dimension (id, hypertable_id, column_name, column_type, aligned, num_slices, partitioning_func_schema, partitioning_func, interval_length, integer_now_func_schema, integer_now_func) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.dimension ENABLE TRIGGER ALL;
@@ -91,6 +97,7 @@ ALTER TABLE _timescaledb_catalog.dimension ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.dimension_slice DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.dimension_slice (id, dimension_id, range_start, range_end) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.dimension_slice ENABLE TRIGGER ALL;
@@ -102,6 +109,7 @@ ALTER TABLE _timescaledb_catalog.dimension_slice ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.chunk_constraint DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.chunk_constraint (chunk_id, dimension_slice_id, constraint_name, hypertable_constraint_name) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.chunk_constraint ENABLE TRIGGER ALL;
@@ -113,7 +121,7 @@ ALTER TABLE _timescaledb_catalog.chunk_constraint ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.chunk_data_node DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.chunk_data_node (chunk_id, node_chunk_id, node_name) FROM stdin;
-
+\.
 
 
 ALTER TABLE _timescaledb_catalog.chunk_data_node ENABLE TRIGGER ALL;
@@ -125,6 +133,7 @@ ALTER TABLE _timescaledb_catalog.chunk_data_node ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.chunk_index DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.chunk_index (chunk_id, index_name, hypertable_id, hypertable_index_name) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.chunk_index ENABLE TRIGGER ALL;
@@ -136,6 +145,7 @@ ALTER TABLE _timescaledb_catalog.chunk_index ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.compression_chunk_size DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.compression_chunk_size (chunk_id, compressed_chunk_id, uncompressed_heap_size, uncompressed_toast_size, uncompressed_index_size, compressed_heap_size, compressed_toast_size, compressed_index_size, numrows_pre_compression, numrows_post_compression) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.compression_chunk_size ENABLE TRIGGER ALL;
@@ -147,6 +157,7 @@ ALTER TABLE _timescaledb_catalog.compression_chunk_size ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.continuous_agg DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.continuous_agg (mat_hypertable_id, raw_hypertable_id, user_view_schema, user_view_name, partial_view_schema, partial_view_name, bucket_width, direct_view_schema, direct_view_name, materialized_only) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.continuous_agg ENABLE TRIGGER ALL;
@@ -158,6 +169,7 @@ ALTER TABLE _timescaledb_catalog.continuous_agg ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.continuous_aggs_hypertable_invalidation_log DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.continuous_aggs_hypertable_invalidation_log (hypertable_id, lowest_modified_value, greatest_modified_value) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.continuous_aggs_hypertable_invalidation_log ENABLE TRIGGER ALL;
@@ -169,6 +181,7 @@ ALTER TABLE _timescaledb_catalog.continuous_aggs_hypertable_invalidation_log ENA
 ALTER TABLE _timescaledb_catalog.continuous_aggs_invalidation_threshold DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.continuous_aggs_invalidation_threshold (hypertable_id, watermark) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.continuous_aggs_invalidation_threshold ENABLE TRIGGER ALL;
@@ -180,6 +193,7 @@ ALTER TABLE _timescaledb_catalog.continuous_aggs_invalidation_threshold ENABLE T
 ALTER TABLE _timescaledb_catalog.continuous_aggs_materialization_invalidation_log DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.continuous_aggs_materialization_invalidation_log (materialization_id, lowest_modified_value, greatest_modified_value) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.continuous_aggs_materialization_invalidation_log ENABLE TRIGGER ALL;
@@ -191,6 +205,7 @@ ALTER TABLE _timescaledb_catalog.continuous_aggs_materialization_invalidation_lo
 ALTER TABLE _timescaledb_catalog.hypertable_compression DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.hypertable_compression (hypertable_id, attname, compression_algorithm_id, segmentby_column_index, orderby_column_index, orderby_asc, orderby_nullsfirst) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.hypertable_compression ENABLE TRIGGER ALL;
@@ -202,6 +217,7 @@ ALTER TABLE _timescaledb_catalog.hypertable_compression ENABLE TRIGGER ALL;
 ALTER TABLE _timescaledb_catalog.hypertable_data_node DISABLE TRIGGER ALL;
 
 COPY _timescaledb_catalog.hypertable_data_node (hypertable_id, node_hypertable_id, node_name, block_chunks) FROM stdin;
+\.
 
 
 ALTER TABLE _timescaledb_catalog.hypertable_data_node ENABLE TRIGGER ALL;
