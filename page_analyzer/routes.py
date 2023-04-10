@@ -50,9 +50,9 @@ def get_url():
         return redirect(url_for('main.url_page', id=val[0].id))
 
     data.create_url(name=validator.get_link)
-    # page_url = data.get_all_data()[-1]
+    page_url = data.get_all_data()[-1]
     flash("Страница успешно добавлена", "success")
-    return render_template('index.html'), 200
+    return render_template('url.html', data=page_url), 200
 
 
 @main.post("/urls/<id>/checks")
