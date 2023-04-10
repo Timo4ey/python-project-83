@@ -449,4 +449,3 @@ ALTER TABLE ONLY public.url_checks
 --
 -- PostgreSQL database dump complete
 --
-\.
