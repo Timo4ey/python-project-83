@@ -302,8 +302,6 @@ COPY _timescaledb_catalog.hypertable_data_node (hypertable_id, node_hypertable_i
 -- Data for Name: metadata; Type: TABLE DATA; Schema: _timescaledb_catalog; Owner: postgres
 --
 
-COPY _timescaledb_catalog.metadata (key, value, include_in_telemetry) FROM stdin;
-exported_uuid	297f21a7-717e-4124-9823-df641de0b81f	t
 
 
 
@@ -352,7 +350,6 @@ COPY public.url_checks (id, url_id, status_code, h1, title, description, created
 5	3	200	SQLAlchemy 2.0 Documentation	\n        \n        \n    \n    SQLAlchemy Documentation\n —\n    SQLAlchemy 2.0 Documentation\n\n        \n    	None	2023-04-10 12:52:04.573461
 6	1	200	Онлайн-школа программирования, за выпускниками которой охотятся компании\n	Хекслет — больше чем школа программирования. Онлайн курсы, сообщество программистов	Живое онлайн сообщество программистов и разработчиков на JS, Python, Java, PHP, Ruby. Авторские программы обучения с практикой и готовыми проектами в резюме. Помощь в трудоустройстве после успешного окончания обучения	2023-04-10 12:52:04.824145
 7	3	200	SQLAlchemy 2.0 Documentation	\n        \n        \n    \n    SQLAlchemy Documentation\n —\n    SQLAlchemy 2.0 Documentation\n\n        \n    	None	2023-04-10 10:03:35.097156
-
 
 
 --
