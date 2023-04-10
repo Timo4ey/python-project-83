@@ -15,5 +15,6 @@ check:
 	poetry run pytest -v --disable-warnings .
 
 dump:
-	pg_dump  -c -v -U postgres -h containers-us-west-177.railway.app -p 5656  railway  -f  database.sql
+	pg_dump -Fc -E UTF8 --disable-triggers  -U postgres -h containers-us-west-177.railway.app -p 5656  railway  -f  database.sql
+	#pg_dump  -c -v -U postgres -h containers-us-west-177.railway.app -p 5656  railway  -f  database.sql
 #	pg_dump -h localhost -U postgres -d database -t urls > database.sql
