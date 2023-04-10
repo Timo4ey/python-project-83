@@ -44,13 +44,14 @@ def get_url():
     if not validator.is_valid:
         flash("Некорректный URL", "failed")
     if not url or not validator.is_valid:
-        return redirect(url_for('main.main_page'))
+        abort(422)
+        # return redirect(url_for('main.main_page'))
     data = Urls()
     db_data = data.get_all_data()
     val = validator.validate_unique_link(db_data)
     if val:
         flash("Страница уже существует", "info")
-        return redirect(url_for('main.url_page', id=val[0].id))
+        return redirect(url_for('main.url_page'))
 
     data.create_url(name=validator.get_link)
     id = data.get_all_data()[-1].id
@@ -79,3 +80,8 @@ def page_not_found(e):
 @main.errorhandler(500)
 def internal_server_error(e):
     return render_template("unknown_page.html"), 500
+
+
+@main.errorhandler(422)
+def unprocessable_content(e):
+    return redirect(url_for('main.main_page'))
