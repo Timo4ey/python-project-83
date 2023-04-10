@@ -25,7 +25,6 @@ SET SESSION AUTHORIZATION DEFAULT;
 ALTER TABLE _timescaledb_cache.cache_inval_bgw_job DISABLE TRIGGER ALL;
 
 COPY _timescaledb_cache.cache_inval_bgw_job  FROM stdin;
-\.
 
 
 ALTER TABLE _timescaledb_cache.cache_inval_bgw_job ENABLE TRIGGER ALL;
