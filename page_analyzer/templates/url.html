@@ -1,10 +1,12 @@
 {% extends 'body.html'%}
  {% block page_content %}
+{% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
         {% for alert, message in messages %}
         <div class="alert alert-{{ alert }}" role="alert">{{ message }}</div>
         {% endfor %}
     {% endif %}
+{% endwith %}
     <div class="container-lg mt-3">
 
         <h1>Сайт: {{ data.name }}</h1>

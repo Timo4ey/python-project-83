@@ -1,6 +1,5 @@
 from flask import (render_template, request,
                    Blueprint, flash,
-                   get_flashed_messages,
                    redirect, abort,
                    url_for)
 from .link_validator import Validator
@@ -12,8 +11,7 @@ main = Blueprint("main", __name__)
 
 @main.route('/')
 def main_page():
-    messages = get_flashed_messages(with_categories=True)
-    return render_template('index.html', messages=messages)
+    return render_template('index.html')
 
 
 @main.route('/urls', methods=["GET"])
@@ -26,12 +24,10 @@ def urls():
 @main.route('/urls/<int:id>')
 def url_page(id):
     data = Urls().get_certain_id(id)
-    message = get_flashed_messages(with_categories=True)
     if data:
         checked = [x for x in UrlChecks().get_all_data()
                    if x.url_id == id][::-1]
-        return render_template('url.html', data=data,
-                               messages=message, checked=checked)
+        return render_template('url.html', data=data, checked=checked)
     abort(404, description="Resource not found")
 
 
@@ -44,19 +40,19 @@ def get_url():
     if not validator.is_valid:
         flash("Некорректный URL", "failed")
     if not url or not validator.is_valid:
-        abort(422)
+        return render_template('index.html'), 422
         # return redirect(url_for('main.main_page'))
     data = Urls()
     db_data = data.get_all_data()
     val = validator.validate_unique_link(db_data)
     if val:
         flash("Страница уже существует", "info")
-        return redirect(url_for('main.url_page'))
+        return redirect(url_for('main.url_page', id=val[0].id))
 
     data.create_url(name=validator.get_link)
     id = data.get_all_data()[-1].id
     flash("Страница успешно добавлена", "success")
-    return redirect(url_for('main.url_page', id=id))
+    return redirect(url_for('main.url_page', id=id[0].id))
 
 
 @main.post("/urls/<id>/checks")
@@ -82,6 +78,6 @@ def internal_server_error(e):
     return render_template("unknown_page.html"), 500
 
 
-@main.errorhandler(422)
-def unprocessable_content(e):
-    return redirect(url_for('main.main_page'))
+# @main.errorhandler(422)
+# def unprocessable_content(e):
+#     return redirect(url_for('main.main_page'))
