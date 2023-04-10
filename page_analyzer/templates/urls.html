@@ -13,22 +13,27 @@
                   </tr>
 <!--                  if1 start-->
                    {% if data %}
-                        {% for k,v in data.items() %}
+                        {% for item in data %}
                             <tr>
-                              <td>{{ k }}</td>
+                              <td>{{ item.id }}</td>
                               <td>
-                                <a href="/urls/{{ k }}">
-                                  {{ v.name }}
+                              {% if  item.name %}
+                                <a href="/urls/{{  item.id}}">
+                                    {{ item.name }}
                                 </a>
+                                 {% else %}
+                                     <td></td>
+                                {% endif %}
                               </td>
-                                {% if v.created_at %}
-                                     <td>{{ v.created_at.date() }}</td>
+                                  {% if item.created_at %}
+                                     <td>{{ item.created_at.date() }}</td>
                                 {% else %}
                                      <td></td>
                                 {% endif %}
 
-                                  {% if v.status_code %}
-                                     <td>{{ v.status_code }}</td>
+                                </td>
+                                  {% if item.status_code %}
+                                     <td>{{ item.status_code }}</td>
                                 {% else %}
                                      <td></td>
                                 {% endif %}

@@ -10,6 +10,7 @@ class PsqlConfig:
     db_password = os.getenv('DB_PASSWORD')
     db_name = os.getenv('DB_NAME')
     DATABASE_URL = os.getenv('DATABASE_URL')
+    db_port = os.getenv('DB_PORT')
 
 
 class Config:
@@ -19,9 +20,9 @@ class Config:
     SESSION_COOKIE_NAME = 'session'
     TEMPLATES_FOLDER = 'templates'
     STATIC_FOLDER = 'static'
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
-    SQLALCHEMY_BINDS = {'database': os.getenv('DATABASE_URL')}
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    # SQLALCHEMY_BINDS = {'database': os.getenv('DATABASE_URL')}
+    # SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class ProdConfig(Config):
