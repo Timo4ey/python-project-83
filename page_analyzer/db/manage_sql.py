@@ -1,11 +1,9 @@
 import psycopg2
-from pathlib import Path
 from datetime import datetime
 from dataclasses import dataclass, fields
 from dotenv import load_dotenv
 import os
 load_dotenv()
-
 
 
 class BaseUrls:
@@ -173,3 +171,4 @@ class DataMix:
 # file = os.path.join(Path(__file__).parent.parent, 'database.sql')
 # b = psycopg2.connect(db)
 # print(b)
+# from pathlib import Path
