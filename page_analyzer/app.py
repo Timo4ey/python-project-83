@@ -33,7 +33,7 @@ def main_page():
 def urls():
     url = MergeData()
     executed = url.get_merge()
-    return render_template('urls.html', data=executed, url_checks={})
+    return render_template('urls.html', data=executed)
 
 
 @app.route('/urls/<int:id>')
@@ -64,12 +64,11 @@ def get_url():
     if val:
         flash("Страница уже существует", "info")
         id = val.id
-        return redirect(url_for('url_page', id=id))
     else:
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.new_link)
         id = data.get_certain_name(validator.new_link).id
-        return redirect(url_for('url_page', id=id))
+    return redirect(url_for('url_page', id=id))
 
 
 @app.post("/urls/<id>/checks")
