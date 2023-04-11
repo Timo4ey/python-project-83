@@ -75,7 +75,7 @@ class DataBuilder(GetRequest):
         data = self.bs.select("head meta[name='description']")
         if data:
             str_d = str(data).split('"')
-            self.description = str_d[1]
+            self.description = str_d[1].replace("'", "''")
             return self.description
 
     def get_all_data(self):

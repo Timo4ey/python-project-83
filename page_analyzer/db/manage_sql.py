@@ -32,6 +32,7 @@ class BaseUrls:
         try:
             curs = conn.cursor()
             curs.execute(string)
+            conn.commit()
             if string.find("SELECT") != -1:
                 result = curs.fetchall()
         finally:
