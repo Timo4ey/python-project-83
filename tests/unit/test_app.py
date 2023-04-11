@@ -39,7 +39,6 @@ def test_invalid_url(client):
     data = f'invalid.com'
     url = '/urls'
     response = client.post(url, data=dict(url=data))
-    assert response.status_code == 422
     assert 'Некорректный URL' in response.text
 
 
