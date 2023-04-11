@@ -18,7 +18,7 @@
                 </tr>
                 <tr>
                   <td>Дата создания</td>
-                  <td>{{ data.created_at.date() }}</td>
+                  <td>{{ data.created_at }}</td>
 
                 </tr>
               </tbody>
@@ -65,7 +65,7 @@
                         <td></td>
                     {% endif %}
 
-                    <td>{{ url.created_at.date() }}</td>
+                    <td>{{ url.created_at }}</td>
                     {% endfor %}
                 </tr>
                   {% endif %}
