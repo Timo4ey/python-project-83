@@ -52,9 +52,9 @@ def get_url():
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.get_link)
         url_id = max([x.id for x in data.get_all_data()])
-    # page_url = data.get_all_data()[-1]
-    return redirect(url_for('main.url_page', id=url_id))
-    # return render_template('url.html', data=page_url), 200
+    page_url = data.get_all_data()[-1]
+    # return redirect(url_for('main.url_page', id=url_id))
+    return render_template('url.html', data=page_url), 200
 
 
 @main.post("/urls/<id>/checks")
