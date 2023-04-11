@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import (render_template, request,
                    flash,
-                   abort, redirect, url_for)
+                   abort, redirect, url_for,)
 from page_analyzer.link_validator import Validator
 from page_analyzer.url_handler import DataBuilder
 from page_analyzer.db import Urls, UrlChecks, MergeData
@@ -15,7 +15,7 @@ import os
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.urandom(32)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 
 @app.route('/')
@@ -23,7 +23,7 @@ def main_page():
     return render_template('index.html')
 
 
-@app.route('/urls', methods=["GET"])
+@app.route('/urls')
 def urls():
     url = MergeData()
     executed = url.get_merge()
@@ -39,7 +39,7 @@ def url_page(id):
     abort(404, description="Resource not found")
 
 
-@app.route('/urls', methods=["POST"])
+@app.post('/urls')
 def get_url():
     url = request.form['url']
     validator = Validator(url)
@@ -51,7 +51,7 @@ def get_url():
             flash("Некорректный URL", "danger")
         if validator.is_valid.get('size'):
             flash("URL превышает 255 символов", "danger")
-        return render_template('index.html'), 422
+        return render_template('index.html', url=url), 422
     validator.cut_link()
     data = Urls()
     val = data.get_certain_name(validator.new_link)
