@@ -50,14 +50,6 @@ def get_url():
     url = request.form['url']
     validator = Validator(url)
     validator.validation()
-    if validator.is_valid:
-        if not url:
-            flash("URL обязателен", "danger")
-        if validator.is_valid.get('wrong'):
-            flash("Некорректный URL", "danger")
-        if validator.is_valid.get('size'):
-            flash("URL превышает 255 символов", "danger")
-        return render_template('index.html'), 422
     validator.cut_link()
     data = Urls()
     val = data.get_certain_name(validator.new_link)
@@ -68,6 +60,15 @@ def get_url():
         # return render_template('url.html',
         #                        data=data.get_certain_name(
         #                            name=validator.new_link)), 302
+    if validator.is_valid:
+        if not url:
+            flash("URL обязателен", "danger")
+        if validator.is_valid.get('wrong'):
+            flash("Некорректный URL", "danger")
+        if validator.is_valid.get('size'):
+            flash("URL превышает 255 символов", "danger")
+        return render_template('index.html'), 422
+
     else:
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.new_link)
