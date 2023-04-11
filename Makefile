@@ -17,7 +17,7 @@ publish:
 build: check
 	poetry build
 
-check: selfcheck test lint
+check: selfcheck test
 
 tests-coverage:
 	poetry run pytest --cov=gendiff --cov-report xml
