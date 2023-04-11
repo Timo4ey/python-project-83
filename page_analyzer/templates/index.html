@@ -4,7 +4,7 @@
     {% if messages %}
           {% for status, message in messages %}
             <div class="alert alert-{{ status }}" role="alert">
-                <text>{{ message }}</text>
+                {{ message }}
             </div>
           {% endfor %}
         {% endif %}
