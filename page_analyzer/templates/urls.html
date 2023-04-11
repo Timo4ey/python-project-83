@@ -17,7 +17,7 @@
                               <td>{{ item.id }}</td>
                               <td>
                               {% if  item.name %}
-                                <a href="{{ url_for('main.url_page', id=item.id) }}">
+                                <a href="{{ url_for('url_page', id=item.id) }}">
                                     {{ item.name }}
                                 </a>
                                  {% else %}
