@@ -41,23 +41,18 @@ def get_url():
             flash("Некорректный URL", "danger")
         if validator.is_valid.get('size'):
             flash("URL превышает 255 символов", "danger")
-        return render_template('index.html')
+        return render_template('index.html'), 422
     validator.cut_link()
     data = Urls()
     val = data.get_certain_name(validator.new_link)
-
     if val:
         flash("Страница уже существует", "info")
         id = val.id
-        # return redirect(url_for('main.url_page', id=val[0].id))
     else:
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.new_link)
         id = data.get_certain_name(validator.new_link).id
-    # data = Urls().get_certain_id(id)
-    # checked = UrlChecks().certain_url(id)
     return redirect(url_for('main.url_page', id=id))
-# return render_template('url.html', id=id, data=data, checked=checked), 200
 
 
 @main.post("/urls/<id>/checks")
