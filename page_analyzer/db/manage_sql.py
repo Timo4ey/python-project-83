@@ -51,9 +51,8 @@ class BaseUrls:
         return self.proper_data_format(dataframe, all_urls)
 
     def certain_url(self, dataframe: dataclass, db_name, id_name, id):
-        url = self.db_connector(
-              self.GET_CERTAIN_URL.format(db_name=db_name,
-                                          id_name=id_name, id=id))
+        url = self.db_connector(self.GET_CERTAIN_URL.format(db_name=db_name,
+                                id_name=id_name, id=id))
         return self.proper_data_format(dataframe, url)
 
     def raw_query(self, query):
@@ -82,7 +81,7 @@ VALUES ('{name}', '{date}');"""
 
     def create_url(self, name):
         self.last_req = self.CREATE_URL.format(
-                          name=name, date=datetime.now())
+                        name=name, date=datetime.now())
         self.db_connector(self.last_req)
 
     def get_certain_id(self, id):
@@ -121,8 +120,9 @@ class UrlChecks(BaseUrls):
         self.all_data = None
 
     def certain_url(self, id):
-        url = super().certain_url(
-              self.DataChecks, db_name='url_checks', id_name='url_id', id=id)
+        url = super().certain_url(self.DataChecks,
+                                  db_name='url_checks',
+                                  id_name='url_id', id=id)
         return url
 
     def get_all_data(self):
