@@ -36,6 +36,20 @@ Flask = "*"
 WTForms = "*"
 
 [[package]]
+name = "bs4"
+version = "0.0.1"
+description = "Dummy package for Beautiful Soup"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "bs4-0.0.1.tar.gz", hash = "sha256:36ecea1fd7cc5c0c6e4a1ff075df26d50da647b75376626cc186e2212886dd3a"},
+]
+
+[package.dependencies]
+beautifulsoup4 = "*"
+
+[[package]]
 name = "cachelib"
 version = "0.10.2"
 description = "A collection of cache libraries in the same API interface."
@@ -804,4 +818,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<4"
-content-hash = "cf2bf54f4b8bc616349d3c5d3b59935d8db06fe3315fcdeed592ebe72b5853d8"
+content-hash = "5cbb1baf37be40a695b913b5f5ec42c775667f73d588c9de78508771173fc75f"

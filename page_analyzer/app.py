@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_bootstrap import Bootstrap4
 from page_analyzer.config import ProdConfig  # DevConfig
 from flask import (render_template, request,
                    flash,
@@ -7,16 +6,17 @@ from flask import (render_template, request,
 from page_analyzer.link_validator import Validator
 from page_analyzer.url_handler import DataBuilder
 from page_analyzer.db import Urls, UrlChecks, MergeData
+import os
+
+# def create_app():
+#     created_app = Flask(__name__)
+#     created_app.config.from_object(ProdConfig)
+#     Bootstrap4(created_app)
+#     return created_app
 
 
-def create_app():
-    created_app = Flask(__name__)
-    created_app.config.from_object(ProdConfig)
-    Bootstrap4(created_app)
-    return created_app
-
-
-app = create_app()
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(32)
 
 
 @app.route('/')
