@@ -1,15 +1,12 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap4
-from page_analyzer.config import DevConfig, ProdConfig
-from dotenv import load_dotenv
+from page_analyzer.config import ProdConfig  # DevConfig
 from flask import (render_template, request,
                    flash,
                    abort, redirect, url_for)
 from page_analyzer.link_validator import Validator
 from page_analyzer.url_handler import DataBuilder
 from page_analyzer.db import Urls, UrlChecks, MergeData
-
-load_dotenv()
 
 
 def create_app():
@@ -93,5 +90,5 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.config.from_object(DevConfig)
+    app.config.from_object(ProdConfig)
     app.run()
