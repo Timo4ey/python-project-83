@@ -1,5 +1,4 @@
 from flask import Flask
-from page_analyzer.config import ProdConfig  # DevConfig
 from flask import (render_template, request,
                    flash,
                    abort, redirect, url_for)
@@ -88,7 +87,3 @@ def checker_page(id):
 def page_not_found(e):
     return render_template("404.html"), 404
 
-
-if __name__ == "__main__":
-    app.config.from_object(ProdConfig)
-    app.run()
