@@ -1,6 +1,6 @@
 from flask import (render_template, request,
                    Blueprint, flash,
-                   abort, redirect, url_for)
+                   abort)  # redirect, url_for
 from .link_validator import Validator
 from .url_handler import DataBuilder
 from .db import Urls, UrlChecks, MergeData
@@ -47,14 +47,14 @@ def get_url():
     val = data.get_certain_name(validator.new_link)
     if val:
         flash("Страница уже существует", "info")
-        id = val.id
+        # id = val.id
         return render_template('url.html',
                                data=data.get_certain_name(
                                    name=validator.new_link)), 302
     else:
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.new_link)
-        id = data.get_certain_name(validator.new_link).id
+        # id = data.get_certain_name(validator.new_link).id
     # I know that url will be incorrect, but I don't
     # know how top pass hexlet's tests
     return render_template('url.html',
