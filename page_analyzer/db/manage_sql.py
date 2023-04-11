@@ -80,8 +80,8 @@ VALUES ('{name}', '{date}');"""
         return self.all_data
 
     def create_url(self, name):
-        self.last_req = self.CREATE_URL.format(
-                        name=name, date=datetime.now())
+        self.last_req = self.CREATE_URL.format(name=name,
+                                               date=datetime.now())
         self.db_connector(self.last_req)
 
     def get_certain_id(self, id):
