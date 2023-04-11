@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 class Validator:
 
     def __init__(self, link):
+        self.base_link = link
         self.is_valid = self.validate_link(link)
         if self.is_valid:
             self.cut_link(link)
@@ -31,6 +32,11 @@ class Validator:
     def validate_unique_link(self, links):
         result = [x for x in links if x.name == self._link]
         return result
+
+    def is_correct_len(self):
+        if len(f'{self.base_link}') > 255:
+            return False
+        return True
 
 
 if __name__ == '__main__':

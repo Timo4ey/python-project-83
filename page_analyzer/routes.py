@@ -1,6 +1,6 @@
 from flask import (render_template, request,
                    Blueprint, flash,
-                   abort)
+                   abort, redirect, url_for)
 from .link_validator import Validator
 from .url_handler import DataBuilder
 from .db import Urls, UrlChecks, MergeData
@@ -37,16 +37,18 @@ def get_url():
         flash("URL обязателен", "danger")
     if not validator.is_valid:
         flash("Некорректный URL", "danger")
-    if not url or not validator.is_valid:
+    if not validator.is_correct_len():
+        flash("URL превышает 255 символов", "danger")
+    if not url or not validator.is_valid or not validator.is_correct_len():
         return render_template('index.html'), 422
     data = Urls()
     db_data = data.get_all_data()
     val = validator.validate_unique_link(db_data)
     if val:
         flash("Страница уже существует", "info")
-        checked = UrlChecks().certain_url(val[0].id)
-        return render_template('url.html', data=val[0], checked=checked)
-        # return redirect(url_for('main.url_page', id=val[0].id))
+        # checked = UrlChecks().certain_url(val[0].id)
+        # return render_template('url.html', data=val[0], checked=checked)
+        return redirect(url_for('main.url_page', id=val[0].id))
 
     data.create_url(name=validator.get_link)
     page_url = data.get_all_data()[-1]
