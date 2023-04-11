@@ -25,8 +25,7 @@ def urls():
 def url_page(id):
     data = Urls().get_certain_id(id)
     if data:
-        checked = [x for x in UrlChecks().get_all_data()
-                   if x.url_id == id][::-1]
+        checked = UrlChecks().certain_url(id)
         return render_template('url.html', data=data, checked=checked)
     abort(404, description="Resource not found")
 
