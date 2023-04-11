@@ -1,4 +1,4 @@
-from .config import Config, ProdConfig, DevConfig, PsqlConfig
+from .config import Config, ProdConfig, DevConfig
 
 
-__all__ = ['Config', "ProdConfig", "DevConfig", "PsqlConfig"]
+__all__ = ['Config', "ProdConfig", "DevConfig"]
