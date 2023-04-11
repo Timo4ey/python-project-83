@@ -36,9 +36,9 @@ def get_url():
     url = request.form['url']
     validator = Validator(url)
     if not url:
-        flash("URL обязателен", "failed")
+        flash("URL обязателен", "danger")
     if not validator.is_valid:
-        flash("Некорректный URL", "failed")
+        flash("Некорректный URL", "danger")
     if not url or not validator.is_valid:
         return render_template('index.html'), 422
     data = Urls()

@@ -3,9 +3,7 @@
 {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
           {% for status, message in messages %}
-            {% if  status == 'failed' %}
-            <div class="alert alert-danger" role="alert">{{ message }}</div>
-            {% endif %}
+            <div class="alert alert-{{ status }}" role="alert">{{ message }}</div>
           {% endfor %}
         {% endif %}
 {% endwith %}
