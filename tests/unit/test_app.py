@@ -1,7 +1,7 @@
-import click
-# from click.testing import
-from time import time
-
+# import click
+# # from click.testing import
+# from time import time
+#
 # def test_home(client):
 #     response = client.get("/")
 #     assert 'Анализатор страниц' in str(response.data.decode('utf-8'))
@@ -15,7 +15,7 @@ from time import time
 #
 #
 # def test_url_page(client):
-#     response = client.get("/urls/1")
+#     response = client.get("/urls/36")
 #     assert 'Сайт' in str(response.data.decode('utf-8'))
 #     assert response.status_code == 200
 #
@@ -29,7 +29,7 @@ from time import time
 # def test_success_input(client):
 #     data = f'https://example{int(time())}.com'
 #     url = '/urls'
-#     response = client.post(url, data=dict(url=data))
+#     response = client.post(url, data=dict(url=data), follow_redirects=True)
 #     assert response.status_code == 200
 #     assert 'Страница успешно добавлена' in response.text
 #     assert data in response.text
