@@ -34,9 +34,6 @@ class GetRequest:
             return conn
         except ConnectTimeout as _ex:
             print(_ex)
-
-
-
         return 402
 
     def status_code(self):

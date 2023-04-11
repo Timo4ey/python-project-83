@@ -174,10 +174,8 @@ class DataMix:
     description: str
     created_at: datetime = datetime.now()
 
-
-
-b = BaseUrls()
-b.create_db()
+# b = BaseUrls()
+# b.create_db()
 # b = UrlChecks()
 # print()
 # data = DataMix(*a)
