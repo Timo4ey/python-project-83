@@ -78,6 +78,7 @@ VALUES ('{name}', '{date}'); COMMIT;"""
     def rollback(self):
         self.db_connector(self.ROLLBACK_URL.format(last_commit=self.last_req))
 
+
 class UrlChecks(BaseUrls):
     CREATE_URL = """INSERT INTO url_checks ({name})
                  VALUES ({values})"""
