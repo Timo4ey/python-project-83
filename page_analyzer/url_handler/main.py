@@ -1,5 +1,5 @@
 import requests
-from requests import ConnectTimeout
+from requests import ConnectTimeout, ReadTimeout
 from bs4 import BeautifulSoup
 from dataclasses import dataclass
 from datetime import datetime
@@ -33,6 +33,8 @@ class GetRequest:
             conn.close()
             return conn
         except ConnectTimeout as _ex:
+            print(_ex)
+        except ReadTimeout as _ex:
             print(_ex)
         return 402
 

@@ -62,7 +62,7 @@ def get_url():
     data = Urls()
     val = data.get_certain_name(validator.new_link)
     if val:
-        flash("Страница уже существует", "success")
+        flash("Страница уже существует", "info")
         id = val.id
         return redirect(url_for('url_page', id=id))
         # return render_template('url.html',
