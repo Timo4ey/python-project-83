@@ -5,7 +5,7 @@ from page_analyzer.config import PsqlConfig
 
 
 class BaseUrls:
-    GET_ALL = """SELECT * FROM {};"""
+    GET_ALL = """ SELECT * FROM {};"""
     GET_CERTAIN_URL = """SELECT * FROM {db_name} WHERE {id_name} = {id};"""
 
     @staticmethod
@@ -45,8 +45,9 @@ class BaseUrls:
 
 
 class Urls(BaseUrls):
-    CREATE_URL = """INSERT INTO urls (name, created_at)
-VALUES ('{name}', '{date}')"""
+    CREATE_URL = """BEGIN; INSERT INTO urls (name, created_at)
+VALUES ('{name}', '{date}'); COMMIT;"""
+    ROLLBACK_URL = """BEGIN; {last_commit} ROLLBACK;"""
 
     @dataclass
     class DataUrls:
@@ -57,14 +58,16 @@ VALUES ('{name}', '{date}')"""
     def __init__(self):
         super().__init__()
         self.all_data = None
+        self.last_req = None
 
     def get_all_data(self):
         self.all_data = self.execute_all(self.DataUrls, 'urls')
         return self.all_data
 
     def create_url(self, name):
-        self.db_connector(self.CREATE_URL.format(
-                          name=name, date=datetime.now()))
+        self.last_req = self.CREATE_URL.format(
+                          name=name, date=datetime.now())
+        self.db_connector(self.last_req)
 
     def get_certain_id(self, id):
         data = self.certain_url(self.DataUrls, 'urls', id_name='id', id=id)
@@ -72,6 +75,8 @@ VALUES ('{name}', '{date}')"""
             return data[0]
         return False
 
+    def rollback(self):
+        self.db_connector(self.ROLLBACK_URL.format(last_commit=self.last_req))
 
 class UrlChecks(BaseUrls):
     CREATE_URL = """INSERT INTO url_checks ({name})
