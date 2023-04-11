@@ -38,7 +38,7 @@ def get_url():
     if not validator.is_valid:
         flash("Некорректный URL", "danger")
     if not url or not validator.is_valid:
-        return render_template('index.html')
+        return render_template('index.html'), 422
     data = Urls()
     db_data = data.get_all_data()
     val = validator.validate_unique_link(db_data)
@@ -69,7 +69,7 @@ def checker_page(id):
     else:
         flash('Произошла ошибка при проверке', "danger")
     checked = urls_check.certain_url(id)
-    return render_template('url.html', data=data, checked=checked)
+    return render_template('url.html', data=data, checked=checked), 422
 
 
 @main.errorhandler(404)
