@@ -47,11 +47,11 @@ def post_urls():
     id_url = db.get_certain_name(url)
     if id_url:
         id_url = id_url.id
-        flash('Страница уже существует', 'info')
-    else:
         db.create_url(url)
+    else:
         id_url = db.get_certain_name(url).id
-        flash('Страница успешно добавлена', 'success')
+    flash('Страница уже существует', 'info')
+    flash('Страница успешно добавлена', 'success')
 
     return redirect(url_for('main.url_page', id=id_url))
 
