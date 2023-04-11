@@ -1,6 +1,6 @@
 from flask import (render_template, request,
                    Blueprint, flash,
-                   abort)
+                   abort, redirect, url_for)
 from .link_validator import Validator
 from .url_handler import DataBuilder
 from .db import Urls, UrlChecks, MergeData
@@ -52,9 +52,10 @@ def get_url():
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.get_link)
         id = Urls().get_all_data()[-1].id
-    data = Urls().get_certain_id(id)
-    checked = UrlChecks().certain_url(id)
-    return render_template('url.html', id=id, data=data, checked=checked), 200
+    # data = Urls().get_certain_id(id)
+    # checked = UrlChecks().certain_url(id)
+    return redirect(url_for('main.url_page', id=id))
+# return render_template('url.html', id=id, data=data, checked=checked), 200
 
 
 @main.post("/urls/<id>/checks")
