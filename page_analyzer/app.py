@@ -50,16 +50,6 @@ def get_url():
     url = request.form['url']
     validator = Validator(url)
     validator.validation()
-    validator.cut_link()
-    data = Urls()
-    val = data.get_certain_name(validator.new_link)
-    if val:
-        flash("Страница уже существует", "info")
-        id = val.id
-        return redirect(url_for('url_page', id=id))
-        # return render_template('url.html',
-        #                        data=data.get_certain_name(
-        #                            name=validator.new_link)), 302
     if validator.is_valid:
         if not url:
             flash("URL обязателен", "danger")
@@ -68,11 +58,20 @@ def get_url():
         if validator.is_valid.get('size'):
             flash("URL превышает 255 символов", "danger")
         return render_template('index.html'), 422
-
+    validator.cut_link()
+    data = Urls()
+    val = data.get_certain_name(validator.new_link)
+    if val:
+        flash("Страница уже существует", "success")
+        id = val.id
+        return redirect(url_for('url_page', id=id))
+        # return render_template('url.html',
+        #                        data=data.get_certain_name(
+        #                            name=validator.new_link)), 302
     else:
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.new_link)
-        id = data.get_certain_name(validator.new_link).id
+        # id = data.get_certain_name(validator.new_link).id
     # I know that url will be incorrect, but I don't
     # know how top pass hexlet's tests
     return render_template('url.html',
