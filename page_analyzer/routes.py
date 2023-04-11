@@ -48,6 +48,7 @@ def get_url():
     if val:
         flash("Страница уже существует", "info")
         id = val.id
+
     else:
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.new_link)
@@ -62,7 +63,7 @@ def checker_page(id):
     response = DataBuilder(link, id)
 
     urls_check = UrlChecks()
-    if 200 <= response.s_code < 300:
+    if 200 >= response.s_code < 300:
         urls_check.create_check(response.get_all_data())
         checked = urls_check.certain_url(id)
         flash('Страница успешно проверена', 'success')
