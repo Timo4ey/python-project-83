@@ -5,38 +5,26 @@ from urllib.parse import urlparse
 class Validator:
 
     def __init__(self, link):
-        self.base_link = link
-        self.is_valid = self.validate_link(link)
-        if self.is_valid:
-            self.cut_link(link)
+        self._link = link
+        self.is_valid = {}
+        self.new_link = None
 
-    @staticmethod
-    def validate_link(url):
-        return validators.url(url)
+    def cut_link(self):
+        self.new_link = urlparse(
+            self._link)._replace(path="",
+                                 params="",
+                                 query="",
+                                 fragment="").geturl()
+        return self.new_link
 
-    def cut_link(self, url):
-        self._link = urlparse(url)._replace(path="",
-                                            params="",
-                                            query="",
-                                            fragment="").geturl()
-
-    @property
-    def get_link(self):
-        return self._link
-
-    @get_link.setter
-    def get_link(self, link):
-        if self.validate_link(link):
-            self.cut_link(link)
-
-    def validate_unique_link(self, links):
-        result = [x for x in links if x.name == self._link]
-        return result
-
-    def is_correct_len(self):
-        if len(f'{self.base_link}') > 255:
-            return False
-        return True
+    def validation(self):
+        length = len(f'{self._link}')
+        if not length:
+            self.is_valid['empty'] = True
+        if not validators.url(self._link):
+            self.is_valid['wrong'] = True
+        if length > 255:
+            self.is_valid['size'] = True
 
 
 if __name__ == '__main__':
@@ -45,7 +33,9 @@ if __name__ == '__main__':
               {'name': 'https://ru.wikipedia.org'}]
     t = "https://ru.hexlet.io/projects/83/members/30036?step=3"
     v = Validator(t)
-    print(v.get_link)
+    v.validation()
+    if v.is_valid:
+        print(v.is_valid)
     # link = 'https://test.com'
     # v = Validator(link)
     # if v.valid:

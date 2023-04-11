@@ -91,6 +91,13 @@ VALUES ('{name}', '{date}');"""
             return data[0]
         return False
 
+    def get_certain_name(self, name):
+        data = self.certain_url(self.DataUrls,
+                                'urls', id_name='name', id=f'\'{name}\'')
+        if data:
+            return data[0]
+        return False
+
     def rollback(self):
         self.db_connector(self.ROLLBACK_URL.format(last_commit=self.last_req))
 

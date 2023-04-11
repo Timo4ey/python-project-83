@@ -29,33 +29,30 @@ def url_page(id):
     abort(404, description="Resource not found")
 
 
-@main.route('/urls', methods=["POST"])
-def get_url():
-    url = request.form['url']
-    validator = Validator(url)
-    if not url:
-        flash("URL обязателен", "danger")
-    if not validator.is_valid:
-        flash("Некорректный URL", "danger")
-    if not validator.is_correct_len():
-        flash("URL превышает 255 символов", "danger")
-    if not url or not validator.is_valid or not validator.is_correct_len():
+@main.post('/urls')
+def post_urls():
+    url = request.form.to_dict().get('url')
+    validation = Validator(url)
+    if validation.is_valid:
+        if validation.is_valid.get('wrong'):
+            flash('Некорректный URL', 'danger')
+        if validation.is_valid.get('empty'):
+            flash('URL обязателен', 'danger')
+        if validation.is_valid.get('size'):
+            flash('URL превышает 255 символов', 'danger')
         return render_template('index.html'), 422
-    data = Urls()
-    db_data = data.get_all_data()
-    val = validator.validate_unique_link(db_data)
-    if val:
-        flash("Страница уже существует", "info")
-        id = val[0].id
-        # return redirect(url_for('main.url_page', id=val[0].id))
+    db = Urls()
+    url = validation.cut_link()
+    id_url = db.get_certain_name(url)
+    if id_url:
+        id_url = id_url.id
+        flash('Страница уже существует', 'info')
     else:
-        flash("Страница успешно добавлена", "success")
-        data.create_url(name=validator.get_link)
-        id = Urls().get_all_data()[-1].id
-    # data = Urls().get_certain_id(id)
-    # checked = UrlChecks().certain_url(id)
-    return redirect(url_for('main.url_page', id=id))
-# return render_template('url.html', id=id, data=data, checked=checked), 200
+        db.create_url(url)
+        id_url = db.get_certain_name(url).id
+        flash('Страница успешно добавлена', 'success')
+
+    return redirect(url_for('main.url_page', id=id_url))
 
 
 @main.post("/urls/<id>/checks")
