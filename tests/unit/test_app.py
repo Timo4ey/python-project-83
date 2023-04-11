@@ -45,5 +45,5 @@ def test_invalid_url(client):
 def test_url_exists_already(client):
     data = 'https://ru.hexlet.io'
     url = '/urls'
-    response = client.post(url, data=dict(url=data))
+    response = client.post(url, data=dict(url=data), follow_redirects=True)
     assert 'Страница уже существует' in response.text
