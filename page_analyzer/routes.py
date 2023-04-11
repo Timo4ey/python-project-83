@@ -33,6 +33,7 @@ def url_page(id):
 def post_urls():
     url = request.form.to_dict().get('url')
     validation = Validator(url)
+    validation.validation()
     if validation.is_valid:
         if validation.is_valid.get('wrong'):
             flash('Некорректный URL', 'danger')
