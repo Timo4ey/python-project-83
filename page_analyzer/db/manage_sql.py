@@ -1,7 +1,9 @@
 import psycopg2
 from datetime import datetime
 from dataclasses import dataclass, fields
-from page_analyzer.config import PsqlConfig
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 
 class BaseUrls:
@@ -11,7 +13,7 @@ class BaseUrls:
     @staticmethod
     def db_connector(string: str):
         result = None
-        conn = psycopg2.connect(f"{PsqlConfig.DATABASE_KEY}")
+        conn = psycopg2.connect(os.getenv('DATABASE_URL'))
         conn.autocommit = True
 
         try:
