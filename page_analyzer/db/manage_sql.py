@@ -3,12 +3,25 @@ from datetime import datetime
 from dataclasses import dataclass, fields
 from dotenv import load_dotenv
 import os
+from pathlib import Path
+
 load_dotenv()
+
+file = os.path.join(Path(__file__).parent.parent, 'database.sql')
 
 
 class BaseUrls:
     GET_ALL = """ SELECT * FROM {};"""
     GET_CERTAIN_URL = """SELECT * FROM {db_name} WHERE {id_name} = {id};"""
+
+    # def create_db():
+    #     """Auxiliary function for creating database tables"""
+    #     conn = connect()
+    #     cursor = conn.cursor()
+    #     with open(file, mode='r') as db_file:
+    #         cursor.execute(db_file.read())
+    #     conn.commit()
+    #     conn.close()
 
     @staticmethod
     def db_connector(string: str):
@@ -171,4 +184,3 @@ class DataMix:
 # file = os.path.join(Path(__file__).parent.parent, 'database.sql')
 # b = psycopg2.connect(db)
 # print(b)
-# from pathlib import Path
