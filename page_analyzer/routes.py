@@ -44,10 +44,9 @@ def get_url():
     data = Urls()
     db_data = data.get_all_data()
     val = validator.validate_unique_link(db_data)
+    print(val)
     if val:
-        flash("Страница уже существует", "info")
-        # checked = UrlChecks().certain_url(val[0].id)
-        # return render_template('url.html', data=val[0], checked=checked)
+        flash("Страница уже существует", "success")
         return redirect(url_for('main.url_page', id=val[0].id))
 
     data.create_url(name=validator.get_link)
