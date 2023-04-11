@@ -31,6 +31,7 @@ class Validator:
 
     def validate_unique_link(self, links):
         result = [x for x in links if x.name == self._link]
+        print(result)
         return result
 
     def is_correct_len(self):
