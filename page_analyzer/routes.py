@@ -1,6 +1,6 @@
 from flask import (render_template, request,
                    Blueprint, flash,
-                   abort, redirect, url_for)
+                   abort)
 from .link_validator import Validator
 from .url_handler import DataBuilder
 from .db import Urls, UrlChecks, MergeData
@@ -45,14 +45,11 @@ def get_url():
     db_data = data.get_all_data()
     val = validator.validate_unique_link(db_data)
     if val:
-        url_id = val[0].id
         flash("Страница уже существует", "info")
-        return redirect(url_for('main.url_page', id=url_id)), 302
-        #
+        # return redirect(url_for('main.url_page', id=val[0].id))
     else:
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.get_link)
-        # url_id = max([x.id for x in data.get_all_data()])
     page_url = data.get_all_data()[-1]
 
     return render_template('url.html', data=page_url), 200
@@ -65,7 +62,7 @@ def checker_page(id):
     response = DataBuilder(link, id)
 
     urls_check = UrlChecks()
-    if 200 >= response.s_code < 300:
+    if 200 <= response.s_code < 300:
         urls_check.create_check(response.get_all_data())
         checked = urls_check.certain_url(id)
         flash('Страница успешно проверена', 'success')
