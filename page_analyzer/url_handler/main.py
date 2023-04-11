@@ -60,18 +60,14 @@ class DataBuilder(GetRequest):
     def __get_item(self, item) -> str:
         array = tuple(map(lambda x: x.get_text(), self.bs.select(item)))
         if array:
-            return array[0]
+            return f"{array[0]}".replace("'", "''")
 
     def get_title(self):
         self.title = self.__get_item('head title')
-        if type(self.title) == str:
-            self.title.replace("'", "''")
-        return self.title.replace("'", "''")
+        return self.title
 
     def get_h1(self):
         self.h1 = self.__get_item('h1')
-        if type(self.h1) == str:
-            self.h1.replace("'", "''")
         return self.h1
 
     def get_description(self):
@@ -79,7 +75,7 @@ class DataBuilder(GetRequest):
         if data:
             str_d = str(data).split('"')
             self.description = str_d[1]
-            return self.description.replace("'", "''")
+            return self.description
 
     def get_all_data(self):
         return self.DataMix(self.id, self.status_code(),

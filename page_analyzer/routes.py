@@ -56,15 +56,20 @@ def get_url():
 
 @main.post("/urls/<id>/checks")
 def checker_page(id):
-    link = Urls().get_certain_id(id=id).name
+    data = Urls().get_certain_id(id)
+    link = data.name
     response = DataBuilder(link, id)
+
+    urls_check = UrlChecks()
     if 200 <= response.s_code < 300:
-        urls_check = UrlChecks()
         urls_check.create_check(response.get_all_data())
+        checked = urls_check.certain_url(id)
         flash('Страница успешно проверена', 'success')
+        return render_template('url.html', data=data, checked=checked), 200
     else:
         flash('Произошла ошибка при проверке', "danger")
-    return redirect(url_for("main.url_page", id=id))
+    checked = urls_check.certain_url(id)
+    return render_template('url.html', data=data, checked=checked), 422
 
 
 @main.errorhandler(404)

@@ -6,14 +6,11 @@ from page_analyzer.config import PsqlConfig
 
 class BaseUrls:
     GET_ALL = """SELECT * FROM {};"""
-    GET_CERTAIN_URL = """SELECT * FROM {db_name} WHERE id = {id};"""
+    GET_CERTAIN_URL = """SELECT * FROM {db_name} WHERE {id_name} = {id};"""
 
     @staticmethod
     def db_connector(string: str):
         result = None
-        # sec = "bz5Lt06h8B1FP2DXeLVu@containers-us-west-177"
-        # third = ".railway.app:5656/railway"
-        # print(f"postgresql://postgres:{sec}{third}")
         conn = psycopg2.connect(f"{PsqlConfig.DATABASE_KEY}")
         conn.autocommit = True
 
@@ -37,9 +34,10 @@ class BaseUrls:
         all_urls = self.db_connector(self.GET_ALL.format(table_name))
         return self.proper_data_format(dataframe, all_urls)
 
-    def certain_url(self, dataframe: dataclass, db_name, id):
+    def certain_url(self, dataframe: dataclass, db_name, id_name, id):
         url = self.db_connector(
-              self.GET_CERTAIN_URL.format(db_name=db_name, id=id))
+              self.GET_CERTAIN_URL.format(db_name=db_name,
+                                          id_name=id_name, id=id))
         return self.proper_data_format(dataframe, url)
 
     def raw_query(self, query):
@@ -69,17 +67,15 @@ VALUES ('{name}', '{date}')"""
                           name=name, date=datetime.now()))
 
     def get_certain_id(self, id):
-        data = self.certain_url(self.DataUrls, 'urls', id=id)
+        data = self.certain_url(self.DataUrls, 'urls', id_name='id', id=id)
         if data:
             return data[0]
         return False
 
 
 class UrlChecks(BaseUrls):
-    GET_ALL_URL = """SELECT * FROM url_checks;"""
     CREATE_URL = """INSERT INTO url_checks ({name})
                  VALUES ({values})"""
-    GET_CERTAIN_URL = """SELECT * FROM url_checks WHERE id = {id};"""
 
     @dataclass
     class DataChecks:
@@ -97,7 +93,7 @@ class UrlChecks(BaseUrls):
 
     def certain_url(self, id):
         url = super().certain_url(
-              self.DataChecks, db_name='url_checks', id=id)
+              self.DataChecks, db_name='url_checks', id_name='url_id', id=id)
         return url
 
     def get_all_data(self):
@@ -115,6 +111,7 @@ class UrlChecks(BaseUrls):
                         )
         self.db_connector(self.CREATE_URL.format(
                           name=headers, values=val))
+        return query
 
 
 class MergeData(Urls, UrlChecks):
