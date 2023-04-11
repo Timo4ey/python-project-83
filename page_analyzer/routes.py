@@ -1,6 +1,6 @@
 from flask import (render_template, request,
                    Blueprint, flash,
-                   abort, redirect, url_for)
+                   abort)
 from .link_validator import Validator
 from .url_handler import DataBuilder
 from .db import Urls, UrlChecks, MergeData
