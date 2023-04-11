@@ -1,9 +1,11 @@
 import psycopg2
+from pathlib import Path
 from datetime import datetime
 from dataclasses import dataclass, fields
 from dotenv import load_dotenv
 import os
 load_dotenv()
+
 
 
 class BaseUrls:
@@ -166,3 +168,8 @@ class DataMix:
 # data = DataMix(*a)
 # # print(data)
 # b.create_check(data)
+
+# db = "postgresql://postgres:Bedema99@localhost:5432/database"
+# file = os.path.join(Path(__file__).parent.parent, 'database.sql')
+# b = psycopg2.connect(db)
+# print(b)
