@@ -1,5 +1,5 @@
-{% extends 'body.html' %}
-    {% block page_content %}
+{% extends 'base.html' %}
+     {% block content %}
     <div class="container-lg mt-3">
         <h1>Сайты</h1>
         <div class="table-responsive">
@@ -18,7 +18,7 @@
                               <td>{{ item.id }}</td>
                               <td>
                               {% if  item.name %}
-                                <a href="/urls/{{  item.id}}">
+                                <a href="{{ url_for('main.url_page', id=item.id) }}">
                                     {{ item.name }}
                                 </a>
                                  {% else %}
