@@ -29,10 +29,14 @@ class GetRequest:
     @staticmethod
     def get_data(link):
         try:
-            with requests.get(link, timeout=10) as data:
-                return data
+            conn = requests.get(link, timeout=10)
+            conn.close()
+            return conn
         except ConnectTimeout as _ex:
             print(_ex)
+
+
+
         return 402
 
     def status_code(self):
@@ -83,13 +87,13 @@ class DataBuilder(GetRequest):
                             self.get_description())
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # https://www.crummy.com/
     # https://ru.hexlet.io/
     # https://scrapeops.io/
     # http://test.com
-    g = DataBuilder("https://scrapeops.io", 1)
-    print(g.req)
+    # g = DataBuilder("https://scrapeops.io", 1)
+    # print(g.req)
 
     # s = g.get_all_data()
     # i = ','.join([x for x in s.__dataclass_fields__])

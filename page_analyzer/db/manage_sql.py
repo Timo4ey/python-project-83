@@ -7,21 +7,21 @@ from pathlib import Path
 
 load_dotenv()
 
-file = os.path.join(Path(__file__).parent.parent, 'database.sql')
+file = os.path.join(Path(__file__).parent.parent.parent, 'database.sql')
 
 
 class BaseUrls:
     GET_ALL = """ SELECT * FROM {};"""
     GET_CERTAIN_URL = """SELECT * FROM {db_name} WHERE {id_name} = {id};"""
 
-    # def create_db():
-    #     """Auxiliary function for creating database tables"""
-    #     conn = connect()
-    #     cursor = conn.cursor()
-    #     with open(file, mode='r') as db_file:
-    #         cursor.execute(db_file.read())
-    #     conn.commit()
-    #     conn.close()
+    def create_db(self):
+        """Auxiliary function for creating database tables"""
+        conn = psycopg2.connect(os.getenv('DATABASE_URL'))
+        cursor = conn.cursor()
+        with open(file, mode='r') as db_file:
+            cursor.execute(db_file.read())
+        conn.commit()
+        conn.close()
 
     @staticmethod
     def db_connector(string: str):
@@ -60,8 +60,8 @@ class BaseUrls:
 
 
 class Urls(BaseUrls):
-    CREATE_URL = """BEGIN; INSERT INTO urls (name, created_at)
-VALUES ('{name}', '{date}'); COMMIT;"""
+    CREATE_URL = """INSERT INTO urls (name, created_at)
+VALUES ('{name}', '{date}');"""
     ROLLBACK_URL = """BEGIN; {last_commit} ROLLBACK;"""
 
     @dataclass
@@ -174,6 +174,10 @@ class DataMix:
     description: str
     created_at: datetime = datetime.now()
 
+
+
+b = BaseUrls()
+b.create_db()
 # b = UrlChecks()
 # print()
 # data = DataMix(*a)
