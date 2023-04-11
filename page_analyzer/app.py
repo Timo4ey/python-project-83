@@ -50,18 +50,6 @@ def get_url():
     url = request.form['url']
     validator = Validator(url)
     validator.validation()
-    with open('temp', 'w+') as f:
-        if url == 'http://stub.com/' and url not in f.read():
-            f.write(url)
-        elif url == 'http://stub.com/' and url in f.read():
-            validator.cut_link()
-            data = Urls()
-            val = data.get_certain_name(validator.new_link)
-            if val:
-                flash("Страница уже существует", "success")
-                id = val.id
-                return redirect(url_for('url_page', id=id))
-
     if validator.is_valid:
         if not url:
             flash("URL обязателен", "danger")
