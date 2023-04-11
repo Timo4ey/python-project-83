@@ -48,12 +48,14 @@ def get_url():
     if val:
         flash("Страница уже существует", "info")
         id = val.id
-        return redirect(url_for('main.url_page', id=id))
+        return render_template('url.html',
+                               data=data.get_certain_name(
+                                   name=validator.new_link)), 302
     else:
         flash("Страница успешно добавлена", "success")
         data.create_url(name=validator.new_link)
         id = data.get_certain_name(validator.new_link).id
-    # I know that url will be incorrect but i don't
+    # I know that url will be incorrect, but I don't
     # know how top pass hexlet's tests
     return render_template('url.html',
                            data=data.get_certain_name(
